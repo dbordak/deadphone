@@ -33,12 +33,15 @@ def index():
 @app.route('/<username>', methods=['GET', 'POST'])
 def profile(username):
 	if request.method == 'POST':
-		update({
-			'name' : username,
-			'msg' : request.form['msg'],
-			'time' : str(datetime.now())
+		if len(request.form['msg'])>160:
+			#Print a failure message of some sort
+		else:
+			update({
+				'name' : username,
+				'msg' : request.form['msg'],
+				'time' : str(datetime.now())
 			})
-		return 'success'
+			return 'success'
 	else:
 		device = devices.find_one({'name' : name})
 		return render_template('index.html', username=username, msg=device['msg'], time=device['time'])
