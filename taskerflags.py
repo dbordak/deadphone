@@ -34,7 +34,7 @@ def index():
 def profile(name):
 	if request.method == 'POST':
 		if len(request.form['msg'])>160:
-			#Print a failure message of some sort
+			return 'fail: message > 160'
 		else:
 			update({
 				'name' : name,
