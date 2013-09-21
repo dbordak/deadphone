@@ -33,7 +33,7 @@ def index():
 def profile(username):
 	if request.method == 'POST':
 		update({
-			'name' : request.form['username'],
+			'name' : username,
 			'msg' : request.form['message'],
 			'time' : str(datetime.now())
 			})
