@@ -1,1 +1,3 @@
-Web interface for checking Tasker flags.
+Web interface providing a short status message along with notification of critically low battery levels and Google Calendar busy status.
+
+See it in action at https://taskerflags.herokuapp.com/
