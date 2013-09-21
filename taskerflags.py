@@ -16,7 +16,6 @@ example_phone = {
 	"msg" : "hi i am not home right now please leave a message after the beep. beep."
 }
 #UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
-list(devices.find())
 
 def update(device):
 	return devices.find_and_modify(
@@ -26,7 +25,6 @@ def update(device):
 	)
 
 update(example_phone)
-list(devices.find())
 
 @app.route('/')
 def index():
