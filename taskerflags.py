@@ -14,11 +14,15 @@ example_phone = {
 	"timestamp" : "i do not know what the format of this is supposed to beeeeeee",
 	"message" : "hi i am not home right now please leave a message after the beep. beep."
 }
-UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
-#TODO do things with this
+#UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
+update(example_phone);
 
-def fetch(name):
-	return devices.find_one({"name" : name})
+def update(device):
+	return devices.findAndModify( {
+		query : {"name" : device.name},
+		update : device,
+		upsert : true
+	})
 
 @app.route('/')
 def index():
