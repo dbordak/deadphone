@@ -35,7 +35,7 @@ def profile(username):
 	if request.method == 'POST':
 		update({
 			'name' : username,
-			'msg' : request.form['message'],
+			'msg' : request.form['msg'],
 			'time' : str(datetime.now())
 			})
 		return 'success'
