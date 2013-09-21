@@ -19,11 +19,11 @@ example_phone = {
 list(devices.find())
 
 def update(device):
-	return devices.find_and_modify( {
-		query: {name: device.name},
-		update: device,
-		upsert: True
-	})
+	return devices.find_and_modify(
+		query={name: device.name},
+		update=device,
+		upsert=True
+	)
 
 update(example_phone)
 list(devices.find())
