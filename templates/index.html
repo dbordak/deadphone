@@ -7,8 +7,13 @@
 
 {% if username %}
 	<h1>Reports for {{ username }}:</h1>
+
+	{% if msg %}
+	{% if time %}
 	<p>Message: {{msg}}</p>
 	<p>Time: {{time}}</p>
+	{% endif %}
+	{% endif %}
 	
 {% else %}
 	<h1>Tasker Flags</h1>
