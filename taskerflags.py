@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ mongo_db = client.get_default_database()
 def index():
 	return render_template('index.html')
 
-@app.route('/u/<username>', methods=['GET', 'POST'])
+@app.route('/<username>', methods=['GET', 'POST'])
 def profile(username):
 	if request.method == 'POST':
 		return 'TODO: add message to database'
