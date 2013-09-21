@@ -41,4 +41,5 @@ def profile(username):
 		return 'success'
 	else:
 		device = devices.find_one({'name' : name})
-		return render_template('index.html', username=username, msg=device['msg'], time=device['time'])
+		return device['msg']
+		#return render_template('index.html', username=username, msg=device['msg'], time=device['time'])
