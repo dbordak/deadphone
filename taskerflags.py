@@ -14,7 +14,7 @@ devices = db.devices
 #	"name" : "phon",
 #	"bat" : "1",
 #	"busy" : "0",
-#	"time" : "i do not know what the format of this is supposed to beeeeeee",
+#	"time" : "YYYY-MM-DD HH:MM:SS.SSSSSS",
 #	"msg" : "hi i am not home right now please leave a message after the beep. beep."
 #}
 #update(example_phone)
