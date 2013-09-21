@@ -16,7 +16,7 @@ example_phone = {
 	"message" : "hi i am not home right now please leave a message after the beep. beep."
 }
 #UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
-update(example_phone);
+update(example_phone)
 
 def update(device):
 	return devices.findAndModify( {
