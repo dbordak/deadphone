@@ -39,7 +39,7 @@ def profile(name):
 			update({
 				'name' : name,
 				'msg' : request.form['msg'],
-				'time' : str(datetime.now())
+				'time' : datetime.strftime(datetime.now(),"%a %b %d, %Y - %I:%M %p")
 			})
 			return 'success'
 	else:
