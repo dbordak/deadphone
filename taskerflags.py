@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 from pymongo import MongoClient
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -31,6 +32,11 @@ def index():
 @app.route('/<username>', methods=['GET', 'POST'])
 def profile(username):
 	if request.method == 'POST':
-		return 'TODO: add message to database'
+		devices.insert({
+			'username' : request.form['username'],
+			'message' : request.form['message'],
+			'time' : str(datetime.now())
+			})
+		return 'success'
 	else:
 		return render_template('index.html', username=username) #TODO fetch messages
