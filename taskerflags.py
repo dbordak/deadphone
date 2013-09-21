@@ -14,7 +14,7 @@ devices = db.devices
 #	"name" : "phon",
 #	"bat" : "1",
 #	"busy" : "0",
-#	"time" : "i do not know what the format of this is supposed to beeeeeee",
+#	"time" : "YYYY-MM-DD HH:MM:SS.SSSSSS",
 #	"msg" : "hi i am not home right now please leave a message after the beep. beep."
 #}
 #update(example_phone)
@@ -41,4 +41,4 @@ def profile(username):
 		return 'success'
 	else:
 		device = devices.find_one({'name' : name})
-		return render_template('index.html', username=username, msg=device['msg'], time=device['time']) #TODO fetch messages
+		return render_template('index.html', username=username, msg=device['msg'], time=device['time'])
