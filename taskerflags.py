@@ -30,18 +30,18 @@ def update(device):
 def index():
 	return render_template('index.html')
 
-@app.route('/<username>', methods=['GET', 'POST'])
-def profile(username):
+@app.route('/<name>', methods=['GET', 'POST'])
+def profile(name):
 	if request.method == 'POST':
 		if len(request.form['msg'])>160:
 			#Print a failure message of some sort
 		else:
 			update({
-				'name' : username,
+				'name' : name,
 				'msg' : request.form['msg'],
 				'time' : str(datetime.now())
 			})
 			return 'success'
 	else:
 		device = devices.find_one({'name' : name})
-		return render_template('index.html', username=username, msg=device['msg'], time=device['time'])
+		return render_template('index.html', name=name, msg=device['msg'], time=device['time'])
