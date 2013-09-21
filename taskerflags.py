@@ -10,10 +10,10 @@ db = client.get_default_database()
 devices = db.devices
 example_phone = {
 	"name" : "phon",
-	"battery" : "1",
+	"bat" : "1",
 	"busy" : "0",
-	"timestamp" : "i do not know what the format of this is supposed to beeeeeee",
-	"message" : "hi i am not home right now please leave a message after the beep. beep."
+	"time" : "i do not know what the format of this is supposed to beeeeeee",
+	"msg" : "hi i am not home right now please leave a message after the beep. beep."
 }
 #UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
 list(devices.find())
@@ -35,9 +35,9 @@ def index():
 @app.route('/<username>', methods=['GET', 'POST'])
 def profile(username):
 	if request.method == 'POST':
-		devices.insert({
-			'username' : request.form['username'],
-			'message' : request.form['message'],
+		update({
+			'name' : request.form['username'],
+			'msg' : request.form['message'],
 			'time' : str(datetime.now())
 			})
 		return 'success'
