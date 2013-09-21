@@ -11,12 +11,13 @@ example_phone = {
 	"name" : "phon",
 	"battery" : "1",
 	"busy" : "0",
+	"timestamp" : "i do not know what the format of this is supposed to beeeeeee",
 	"message" : "hi i am not home right now please leave a message after the beep. beep."
 }
 UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
 #TODO do things with this
 
-def fetch(name)
+def fetch(name):
 	
 
 @app.route('/')
