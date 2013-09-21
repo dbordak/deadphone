@@ -18,7 +18,7 @@ UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not
 #TODO do things with this
 
 def fetch(name):
-	
+	devices.find_one({"name" : name})
 
 @app.route('/')
 def index():
