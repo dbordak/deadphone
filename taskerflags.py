@@ -20,9 +20,9 @@ update(example_phone)
 
 def update(device):
 	return devices.find_and_modify( {
-		query : {"name" : device.name},
-		update : device,
-		upsert : true
+		"query" : {"name" : device.name},
+		"update" : device,
+		"upsert" : True
 	})
 
 @app.route('/')
