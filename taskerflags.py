@@ -40,4 +40,5 @@ def profile(username):
 			})
 		return 'success'
 	else:
-		return render_template('index.html', username=username) #TODO fetch messages
+		device = devices.find_one({'name' : name})
+		return render_template('index.html', username=username, msg=device['msg'], time=device['time']) #TODO fetch messages
