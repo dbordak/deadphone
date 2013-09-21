@@ -22,4 +22,4 @@ def profile(username):
 	if request.method == 'POST':
 		return 'TODO: add message to database'
 	else:
-		return username #TODO fetch messages
+		return render_template('index.html', username=username) #TODO fetch messages

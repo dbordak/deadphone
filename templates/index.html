@@ -2,5 +2,12 @@
 
 </head>
 <body>
-<p>Hello World</p>
+{% if username %}
+	<h1>Reports for {{ username }}:</h1>
+	
+{% else %}
+	<h1>Tasker Flags</h1>
+	<p>Usage: POST a message to /{username}, then GET /{username} to view the flags.</p>
+
+{% endif %}}
 </body>
