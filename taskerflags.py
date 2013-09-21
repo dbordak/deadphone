@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 client = MongoClient(os.environ['MONGOHQ_URL'])
 mongo_db = client.get_default_database()
+#TODO do things with this
 
 @app.route('/')
 def index():
