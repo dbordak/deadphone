@@ -1,3 +1,5 @@
 Web interface providing a short status message along with notification of critically low battery levels and Google Calendar busy status.
 
 See it in action at https://taskerflags.herokuapp.com/
+
+This experimental branch is intended to provide support for text message status updates through Twilio.
