@@ -8,9 +8,9 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 example_phone = {
-	"name" : "phon",
-	"battery" : "1"
+	"name_goes_here" : "status message"
 }
+UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
 #TODO do things with this
 
 @app.route('/')
