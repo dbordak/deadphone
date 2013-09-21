@@ -5,7 +5,12 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 client = MongoClient(os.environ['MONGOHQ_URL'])
-mongo_db = client.get_default_database()
+db = client.get_default_database()
+devices = db.devices
+example_phone = {
+	"name" : "phon",
+	"battery" : "1"
+}
 #TODO do things with this
 
 @app.route('/')
