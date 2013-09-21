@@ -8,10 +8,16 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 example_phone = {
-	"name_goes_here" : "status message"
+	"name" : "phon",
+	"battery" : "1",
+	"busy" : "0",
+	"message" : "hi i am not home right now please leave a message after the beep. beep."
 }
 UID = devices.insert(example_phone) #Insertion returns a unique ID; this may not be needed. Only time will tell.
 #TODO do things with this
+
+def fetch(name)
+	
 
 @app.route('/')
 def index():
