@@ -10,16 +10,6 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 
-## Example database entry
-#example_phone = {
-#	'name' : 'phon',
-#	'bat' : '1',
-#	'busy' : '0',
-#	'time' : 'Day Mon DD, YYYY - HH:MM {A,P}M',
-#	'msg' : 'hi i am not home right now please leave a message after the beep. beep.'
-#}
-#update(example_phone)
-
 @app.route('/', methods=['POST'])
 def sms_handler():
 	name = request.values.get('From', None)
