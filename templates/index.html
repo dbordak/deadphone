@@ -18,9 +18,23 @@
     <div class="wrapper">
       <header class="without-description">
         <h1>Tasker Flags</h1>
-        <form method="post" action="https://taskerflags.herokuapp.com/"<Name>
-			Name: <input type="text" name="Name" value=""><br>
-			<input type="submit" value="Search"> 
+        <script type="text/javascript">
+        function processForm(e) {
+		    if (e.preventDefault) e.preventDefault();
+		    window.location.href = "https://taskerflags.herokuapp.com/"+document.getElementById('thing');
+		    return false;
+		}
+
+		var form = document.getElementById('name_form');
+		if (form.attachEvent) {
+    		form.attachEvent("submit", processForm);
+		} else {
+	    	form.addEventListener("submit", processForm);
+		}
+        </script>
+        <form id="name_form">
+        	<input type="text" name="in" value="thing" />
+			<button type="submit">Go</button>
 		</form>
       </header>
       <section>
