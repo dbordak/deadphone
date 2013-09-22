@@ -24,7 +24,6 @@
 			</script>
 			<input name="tbox-name" id="tbox-name" type="text" onkeydown="if (event.keyCode == 13) goName()" />
 			<input name="buttonExecute" onclick="goName()" type="button" value="Go" />
-			<div float="right"><h3>See when and why your friends aren't answering their phones!</h3></div>
 		</header>
 		<section>
 			{% if name %}
@@ -39,6 +38,7 @@
 					{% endif %}
 				{% endif %}
 			{% else %}
+				<div float="right"><h3>See when and why your friends aren't answering their phones!</h3></div>
 				<p>Use the field above to try to find your friends' current ability to answer their phone. If you use a phone number, be sure to start with the country code (+1 for the US and Canada).</p>
 			{% endif %}
 		</section>
