@@ -24,6 +24,12 @@
 			</script>
 			<input name="tbox-name" id="tbox-name" type="text" />
 			<input name="buttonExecute" onclick="goName()" type="button" value="Go" />
+			<script>
+			function searchKeyPress(e){
+				if (typeof e == 'undefined' && window.event) { e = window.event; }
+				if (e.keyCode == 13){goName();}
+			}
+    		</script>
 		</header>
 		<section>
 			{% if ID %}
