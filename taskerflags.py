@@ -11,9 +11,11 @@ db = client.get_default_database()
 devices = db.devices
 
 ## Device object
-#
-#
-#
+# ID   - used for url, when accessed via SMS this is the phone number
+# msg  - short informational message
+# time - timestamp of last update
+# bat  - current battery status. 0 for critical, 1 for feelin' fine
+# busy - current google calendar busy status. 0 for available, 1 for busy
 
 def update_device(ID, msg, **kwargs):
 	if 
