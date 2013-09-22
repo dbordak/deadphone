@@ -28,6 +28,8 @@ def update_device(ID, msg, **kwargs):
 			device['bat']=kwargs['bat']
 		if kwargs.keys()[0] == 'busy':
 			device['busy']=kwargs['busy']
+		if kwargs.keys()[0] == 'name':
+			device['name']=kwargs['name']
 	return devices.find_and_modify(
 		query={'ID': ID},
 		update=device,
@@ -41,6 +43,8 @@ def brace_handler(ID, body):
 			update_device(ID, body, bat=opt[1])
 		if opt[0] == "busy":
 			update_device(ID, body, busy=opt[1])
+		if opt[0] == "name":
+			update_device(ID, body, name=opt[1])
 	else:
 		update_device(ID, body)
 
@@ -51,7 +55,7 @@ def index():
 	else:
 		ID = request.values.get('From', None)
 		body = request.values.get('Body', None)
-		sms_handler(ID, body)
+		brace_handler(ID, body)
 
 @app.route('/<ID>', methods=['GET', 'POST'])
 def profile(ID):
