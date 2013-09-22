@@ -23,7 +23,11 @@ def update_device(name, msg):
 
 def sms_handler(name, body):
 	if body.startswith('{'):
-		
+		op = body.strip('{}').split(',')
+		if op[0] == "bat":
+			#TODO: update_device()
+		if op[0] == "busy":
+			#TODO: update_device()
 	else:
 		update_device(name, body)
 
