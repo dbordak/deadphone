@@ -127,9 +127,9 @@ def profile(ID):
 			elif bat == -1:
 				status = name + astring + plu_end + cstring + plu_start_b + bstring
 		else:
-			if avail:
+			if "avail" in keys:
 				status = name + astring + sing_end
-			elif bat:
+			elif "bat" in keys:
 				if bat == 1:
 					status = name + sing_start_g + bstring
 				elif bat == -1:
