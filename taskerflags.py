@@ -122,7 +122,18 @@ def profile(ID):
 			astring = ""
 			cstring = ""
 		if len(cstring):
-			status = name + astring + cstring + bstring
+			if bat == 1:
+				status = name + astring + plu_end + cstring + plu_start_g + bstring
+			elif bat == -1:
+				status = name + astring + plu_end + cstring + plu_start_b + bstring
 		else:
-			status = ""
+			if avail:
+				status = name + astring + sing_end
+			elif bat:
+				if bat == 1:
+					status = name + sing_start_g + bstring
+				elif bat == -1:
+					status = name + sing_start_b + bstring
+			else:
+				status = ""
 		return render_template('index.html', name=name, msg=device['msg'], time=device['time'], status=status)
