@@ -70,4 +70,4 @@ def profile(ID):
 			return 'success'
 	else:
 		device = devices.find_one({'ID' : ID})
-		return render_template('index.html', ID=ID, msg=device['msg'], time=device['time']) #, name=device['name'])
+		return render_template('index.html', ID=ID, msg=device['msg'], time=device['time']) #, name=device['name'], bat=device['bat'], busy=device['busy'])
