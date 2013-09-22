@@ -19,12 +19,13 @@
 		<header class="without-description">
         	<h1>Tasker Flags</h1>
 			<script>
-			function goName(name){
+			function goName(){
+				name = document.getElementById('tbox-name').value
 				window.location.href = "https://taskerflags.herokuapp.com/"+name;
 			}
 			</script>
 			<input name="tbox-name" id="tbox-name" type="text" />
-			<input name="buttonExecute" onclick="goTo(document.getElementById('tbox-name').value)" type="button" value="Go" />
+			<input name="buttonExecute" onclick="goName()" type="button" value="Go" />
 		</header>
 		<section>
         {% if name %}
