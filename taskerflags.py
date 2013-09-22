@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request
 from pymongo import MongoClient
 from datetime import datetime
+import twilio.twiml
 
 app = Flask(__name__)
 
@@ -18,6 +19,11 @@ devices = db.devices
 #	"msg" : "hi i am not home right now please leave a message after the beep. beep."
 #}
 #update(example_phone)
+
+@app.route("/", methods=['POST'])
+def sms_handler():
+	name = request.values.get('From', None)
+	body = request.values.get('Body', None)
 
 def update(device):
 	return devices.find_and_modify(
