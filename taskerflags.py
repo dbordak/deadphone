@@ -25,7 +25,7 @@ def sms_handler():
 	name = request.values.get('From', None)
 	body = request.values.get('Body', None)
 
-def update(name, msg):
+def update_device(name, msg):
 	return devices.find_and_modify(
 		query={'name': name},
 		update={
@@ -46,7 +46,7 @@ def profile(name):
 		if len(request.form['msg'])>160:
 			return 'fail: message > 160'
 		else:
-			update(name, request.form['msg'])
+			update_device(name, request.form['msg'])
 			return 'success'
 	else:
 		device = devices.find_one({'name' : name})
