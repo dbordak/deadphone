@@ -10,12 +10,6 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 
-@app.route('/', methods=['POST'])
-def sms_handler():
-	name = request.values.get('From', None)
-	body = request.values.get('Body', None)
-	update_device(name, body)
-
 def update_device(name, msg):
 	return devices.find_and_modify(
 		query={'name': name},
@@ -27,9 +21,14 @@ def update_device(name, msg):
 		upsert=True
 	)
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-	return render_template('index.html')
+	if request.method == 'GET':
+		return render_template('index.html')
+	else:
+		name = request.values.get('From', None)
+		body = request.values.get('Body', None)
+		update_device(name, body)
 
 @app.route('/<name>', methods=['GET', 'POST'])
 def profile(name):
