@@ -10,11 +10,19 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 
-batstring_good = " they're charged up and good to go."
-batstring_bad  = " they have found themselves plagued by their current lack of current."
+plu_start_g = " they're"
+plu_start_b = " they have"
+sing_start_g = " is"
+sing_start_b = " is"
 
-string_busy      = " is currently busy, "
-string_available = " is able to talk, as far as we know, "
+batstring_good = " charged up and good to go."
+batstring_bad  = " found themselves plagued by their current lack of current."
+
+string_busy      = " is currently busy"
+string_available = " is able to talk, as far as we know"
+
+plu_end = ", "
+sing_end = "."
 
 conjunction_p = "and"
 conjunction_n = "but"
