@@ -10,34 +10,59 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 
-def update_device(name, msg):
+## Device object
+# ID   - used for url, when accessed via SMS this is the phone number
+# msg  - short informational message
+# time - timestamp of last update
+# bat  - current battery status. 0 for critical, 1 for feelin' fine
+# busy - current google calendar busy status. 0 for available, 1 for busy
+
+def update_device(ID, msg, **kwargs):
+	device = {
+		'ID' : ID,
+		'msg' : msg,
+		'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
+	}
+	if len(kwargs):
+		if kwargs.keys()[0] == 'bat':
+			device['bat']=kwargs['bat']
+		if kwargs.keys()[0] == 'busy':
+			device['busy']=kwargs['busy']
 	return devices.find_and_modify(
-		query={'name': name},
-		update={
-			'name' : name,
-			'msg' : msg,
-			'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
-		},
+		query={'ID': ID},
+		update=device,
 		upsert=True
 	)
+
+def brace_handler(ID, body):
+	if body.startswith('{'):
+		opt = body.strip('{}').split(',')
+		if opt[0] == "bat":
+			update_device(ID, body, bat=opt[1])
+		if opt[0] == "busy":
+			update_device(ID, body, busy=opt[1])
+	else:
+		update_device(ID, body)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	if request.method == 'GET':
 		return render_template('index.html')
 	else:
-		name = request.values.get('From', None)
+		ID = request.values.get('From', None)
 		body = request.values.get('Body', None)
-		update_device(name, body)
+		sms_handler(ID, body)
 
-@app.route('/<name>', methods=['GET', 'POST'])
-def profile(name):
+@app.route('/<ID>', methods=['GET', 'POST'])
+def profile(ID):
 	if request.method == 'POST':
 		if len(request.form['msg'])>160:
 			return 'fail: message > 160'
+		else if ID.startswith('+'):
+			return 'fail: + reserved for SMS'
 		else:
-			update_device(name, request.form['msg'])
+			brace_handler(ID, request.form['msg'])
 			return 'success'
 	else:
-		device = devices.find_one({'name' : name})
-		return render_template('index.html', name=name, msg=device['msg'], time=device['time'])
+		device = devices.find_one({'ID' : ID})
+		return render_template('index.html', ID=ID, msg=device['msg'], time=device['time'])
