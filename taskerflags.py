@@ -21,7 +21,7 @@ def update_device(name, msg):
 		upsert=True
 	)
 
-def sms_handler(name, body):
+def brace_handler(name, body):
 	if body.startswith('{'):
 		op = body.strip('{}').split(',')
 		if op[0] == "bat":
@@ -48,7 +48,7 @@ def profile(name):
 		else if name.startswith('+'):
 			return 'fail: + reserved for SMS'
 		else:
-			update_device(name, request.form['msg'])
+			brace_handler(name, request.form['msg'])
 			return 'success'
 	else:
 		device = devices.find_one({'name' : name})
