@@ -58,7 +58,7 @@ def profile(ID):
 	if request.method == 'POST':
 		if len(request.form['msg'])>160:
 			return 'fail: message > 160'
-		else if ID.startswith('+'):
+		elif ID.startswith('+'):
 			return 'fail: + reserved for SMS'
 		else:
 			brace_handler(ID, request.form['msg'])
