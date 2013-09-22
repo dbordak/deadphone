@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request
 from pymongo import MongoClient
 from datetime import datetime
+import twilio.twiml
 
 app = Flask(__name__)
 
@@ -9,26 +10,25 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 
-## Example database entry
-#example_phone = {
-#	"name" : "phon",
-#	"bat" : "1",
-#	"busy" : "0",
-#	"time" : "Day Mon DD, YYYY - HH:MM {A,P}M",
-#	"msg" : "hi i am not home right now please leave a message after the beep. beep."
-#}
-#update(example_phone)
-
-def update(device):
+def update_device(name, msg):
 	return devices.find_and_modify(
-		query={"name": device["name"]},
-		update=device,
+		query={'name': name},
+		update={
+			'name' : name,
+			'msg' : msg,
+			'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
+		},
 		upsert=True
 	)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-	return render_template('index.html')
+	if request.method == 'GET':
+		return render_template('index.html')
+	else:
+		name = request.values.get('From', None)
+		body = request.values.get('Body', None)
+		update_device(name, body)
 
 @app.route('/<name>', methods=['GET', 'POST'])
 def profile(name):
@@ -36,11 +36,7 @@ def profile(name):
 		if len(request.form['msg'])>160:
 			return 'fail: message > 160'
 		else:
-			update({
-				'name' : name,
-				'msg' : request.form['msg'],
-				'time' : datetime.strftime(datetime.now(),"%a %b %d, %Y - %I:%M %p")
-			})
+			update_device(name, request.form['msg'])
 			return 'success'
 	else:
 		device = devices.find_one({'name' : name})
