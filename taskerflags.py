@@ -10,12 +10,21 @@ client = MongoClient(os.environ['MONGOHQ_URL'])
 db = client.get_default_database()
 devices = db.devices
 
+batstring_good = " they're charged up and good to go."
+batstring_bad  = " they have found themselves plagued by their current lack of current."
+
+string_busy      = " is currently busy, "
+string_available = " is able to talk, as far as we know, "
+
+conjunction_p = "and"
+conjunction_n = "but"
+
 ## Device object
 # ID   - used for url, when accessed via SMS this is the phone number
 # msg  - short informational message
 # time - timestamp of last update
-# bat  - current battery status. 0 for critical, 1 for feelin' fine
-# busy - current google calendar busy status. 0 for available, 1 for busy
+# bat  - current battery status. -1 for critical, 1 for feelin' fine.
+# busy - current google calendar busy status. -1 for busy, 1 for available.
 
 def update_device(ID, msg, **kwargs):
 	device = {
@@ -70,4 +79,4 @@ def profile(ID):
 			return 'success'
 	else:
 		device = devices.find_one({'ID' : ID})
-		return render_template('index.html', ID=ID, msg=device['msg'], time=device['time']) #, name=device['name'])
+		return render_template('index.html', ID=ID, msg=device['msg'], time=device['time']) #, name=device['name'], bat=device['bat'], busy=device['busy'])
