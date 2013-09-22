@@ -20,7 +20,6 @@ devices = db.devices
 def update_device(ID, msg, **kwargs):
 	device = {
 		'ID' : ID,
-		'msg' : msg,
 		'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
 	}
 	if len(kwargs):
@@ -30,6 +29,8 @@ def update_device(ID, msg, **kwargs):
 			device['busy']=kwargs['busy']
 		if kwargs.keys()[0] == 'name':
 			device['name']=kwargs['name']
+	else:
+		device['msg']=msg
 	return devices.find_and_modify(
 		query={'ID': ID},
 		update=device,
