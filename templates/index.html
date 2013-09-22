@@ -27,13 +27,17 @@
 		</header>
 		<section>
 			{% if ID %}
-				<h3>Reports for {{ ID }}:</h3>
-			{% if msg %}
-				{% if time %}
-					<p>Message: {{ msg }}</p>
-					<p>Time: {{ time }}</p>
+				{% if name %}
+					<h3>{{ name }}'s status:</h3>
+				{% else %}
+					<h3>Reports for {{ ID }}:</h3>
 				{% endif %}
-			{% endif %}
+				{% if msg %}
+					{% if time %}
+						<p>Message: {{ msg }}</p>
+						<p>Time: {{ time }}</p>
+					{% endif %}
+				{% endif %}
 			{% else %}
 				<p>Usage: POST a message to /{name}, then GET /{name} to view the flags.</p>
 			{% endif %}
