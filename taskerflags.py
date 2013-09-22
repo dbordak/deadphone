@@ -14,6 +14,7 @@ devices = db.devices
 def sms_handler():
 	name = request.values.get('From', None)
 	body = request.values.get('Body', None)
+	update_device(name, body)
 
 def update_device(name, msg):
 	return devices.find_and_modify(
