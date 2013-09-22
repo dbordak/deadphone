@@ -27,10 +27,11 @@ conjunction_n = "but"
 # avail - current google calendar availability status. -1 for avail, 1 for available.
 
 def update_device(ID, msg, **kwargs):
-	device = {
-		'ID' : ID,
-		'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
-	}
+	if devices.find_one({'ID' : ID}):
+		device = devices.find_one({'ID' : ID})
+	else:
+		device = {'ID' : ID}
+	device['time'] = datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
 	if len(kwargs):
 		if kwargs.keys()[0] == 'bat':
 			device['bat']=kwargs['bat']
