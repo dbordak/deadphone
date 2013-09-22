@@ -13,7 +13,7 @@ devices = db.devices
 batstring_good = " they're charged up and good to go."
 batstring_bad  = " they have found themselves plagued by their current lack of current."
 
-string_busy      = " is currently avail, "
+string_busy      = " is currently busy, "
 string_available = " is able to talk, as far as we know, "
 
 conjunction_p = "and"
@@ -86,29 +86,35 @@ def profile(ID):
 		else:
 			name = ID
 		if "bat" in keys:
-			if device['bat'] == "1":
-				bat = batstring_good
-			if device['bat'] == "-1":
-				bat = batstring_bad
+			bat = int(device['bat'])
+			if bat == 1:
+				bstring = batstring_good
+			elif bat == -1:
+				bstring = batstring_bad
+			else:
+				bstring = ""
 		else:
-			bat = ""
-			conj = ""
+			bstring = ""
+			cstring = ""
 		if "avail" in keys:
-			if device['avail'] == "1":
-				avail = string_available
-			if device['avail'] == "-1":
-				avail = string_busy
-			if "bat" in keys:
-				conj_int = int(avail)*int(device['bat'])
-				if conj_int == 1:
-					conj = conjunction_p
-				if conj_int == -1:
-					conj = conjunction_n
+			avail = int(device['avail'])
+			if avail == 1:
+				astring = string_available
+			elif avail == -1:
+				astring = string_busy
+			else:
+				astring = ""
+			if bat:
+				conj = int(avail)*int(bat)
+				if conj == 1:
+					cstring = conjunction_p
+				if conj == -1:
+					cstring = conjunction_n
 		else:
-			avail = ""
-			conj = ""
-		if len(conj):
-			status = name + avail + conj + bat
+			astring = ""
+			cstring = ""
+		if len(cstring):
+			status = name + astring + cstring + bstring
 		else:
 			status = ""
 		return render_template('index.html', name=name, msg=device['msg'], time=device['time'], status=status)
