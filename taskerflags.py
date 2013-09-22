@@ -35,6 +35,8 @@ def profile(name):
 	if request.method == 'POST':
 		if len(request.form['msg'])>160:
 			return 'fail: message > 160'
+		else if name.startswith('+'):
+			return 'fail: + reserved for SMS'
 		else:
 			update_device(name, request.form['msg'])
 			return 'success'
