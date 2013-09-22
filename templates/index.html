@@ -26,14 +26,8 @@
 			<input name="buttonExecute" onclick="goName()" type="button" value="Go" />
 		</header>
 		<section>
-			{% if name %}
-				<h3>{{ name }}'s status:</h3>
-			{% endif %}
-			{% else %}
-				{% if ID %}
-					<h3>Reports for {{ ID }}:</h3>
-				{% endif %}
-			{% endif %}
+			{% if ID %}
+				<h3>Reports for {{ ID }}:</h3>
 			{% if msg %}
 				{% if time %}
 					<p>Message: {{ msg }}</p>
