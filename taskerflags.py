@@ -23,7 +23,11 @@ def update_device(ID, msg, **kwargs):
 		'msg' : msg,
 		'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
 	}
-	 
+	if len(kwargs):
+		if kwargs.keys()[0] == 'bat':
+			device['bat']=kwargs['bat']
+		if kwargs.keys()[0] == 'busy':
+			device['busy']=kwargs['busy']
 	return devices.find_and_modify(
 		query={'ID': ID},
 		update=device,
