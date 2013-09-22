@@ -21,6 +21,12 @@ def update_device(name, msg):
 		upsert=True
 	)
 
+def sms_handler(name, body):
+	if body.startswith('{'):
+		
+	else:
+		update_device(name, body)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	if request.method == 'GET':
@@ -28,7 +34,7 @@ def index():
 	else:
 		name = request.values.get('From', None)
 		body = request.values.get('Body', None)
-		update_device(name, body)
+		sms_handler(name, body)
 
 @app.route('/<name>', methods=['GET', 'POST'])
 def profile(name):
