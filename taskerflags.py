@@ -12,23 +12,27 @@ devices = db.devices
 
 ## Example database entry
 #example_phone = {
-#	"name" : "phon",
-#	"bat" : "1",
-#	"busy" : "0",
-#	"time" : "Day Mon DD, YYYY - HH:MM {A,P}M",
-#	"msg" : "hi i am not home right now please leave a message after the beep. beep."
+#	'name' : 'phon',
+#	'bat' : '1',
+#	'busy' : '0',
+#	'time' : 'Day Mon DD, YYYY - HH:MM {A,P}M',
+#	'msg' : 'hi i am not home right now please leave a message after the beep. beep.'
 #}
 #update(example_phone)
 
-@app.route("/", methods=['POST'])
+@app.route('/', methods=['POST'])
 def sms_handler():
 	name = request.values.get('From', None)
 	body = request.values.get('Body', None)
 
-def update(device):
+def update(name, msg):
 	return devices.find_and_modify(
-		query={"name": device["name"]},
-		update=device,
+		query={'name': name},
+		update={
+			'name' : name,
+			'msg' : msg,
+			'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
+		},
 		upsert=True
 	)
 
@@ -42,11 +46,7 @@ def profile(name):
 		if len(request.form['msg'])>160:
 			return 'fail: message > 160'
 		else:
-			update({
-				'name' : name,
-				'msg' : request.form['msg'],
-				'time' : datetime.strftime(datetime.now(),"%a %b %d, %Y - %I:%M %p")
-			})
+			update(name, request.form['msg'])
 			return 'success'
 	else:
 		device = devices.find_one({'name' : name})
