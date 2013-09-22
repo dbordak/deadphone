@@ -1,23 +1,21 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" href="static/styles.css">
-    <link rel="stylesheet" href="static/pygment_trac.css">
-    <script src="static/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <a href="https://github.com/dbordak/taskerflags/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
-    <div class="wrapper">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<link rel="stylesheet" href="static/styles.css">
+	<link rel="stylesheet" href="static/pygment_trac.css">
+	<script src="static/scale.fix.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<a href="https://github.com/dbordak/taskerflags/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+	<div class="wrapper">
 		<header class="without-description">
-        	<h1>Tasker Flags</h1>
+			<h1>Tasker Flags</h1>
 			<script>
 			function goName(){
 				name = document.getElementById('tbox-name').value
@@ -28,24 +26,24 @@
 			<input name="buttonExecute" onclick="goName()" type="button" value="Go" />
 		</header>
 		<section>
-        {% if ID %}
-          <h3>Reports for {{ ID }}:</h3>
-          {% if msg %}
-            {% if time %}
-              <p>Message: {{ msg }}</p>
-              <p>Time: {{ time }}</p>
-            {% endif %}
-          {% endif %}
-        {% else %}
-          <p>Usage: POST a message to /{name}, then GET /{name} to view the flags.</p>
-        {% endif %}
-      </section>
-    </div>
-    <footer>
-    	<p>
-    		Created by <a href="https://github.com/dbordak">Daniel Bordak</a>, <a href="https://github.com/revansopher">Revan Sopher</a>, and <a href="https://github.com/ashleyweaver">Ashley Weaver</a>.
-    	</p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-  </body>
+			{% if ID %}
+				<h3>Reports for {{ ID }}:</h3>
+			{% if msg %}
+				{% if time %}
+					<p>Message: {{ msg }}</p>
+					<p>Time: {{ time }}</p>
+				{% endif %}
+			{% endif %}
+			{% else %}
+				<p>Usage: POST a message to /{name}, then GET /{name} to view the flags.</p>
+			{% endif %}
+		</section>
+	</div>
+	<footer>
+		<p>
+			Created by <a href="https://github.com/dbordak">Daniel Bordak</a>, <a href="https://github.com/revansopher">Revan Sopher</a>, and <a href="https://github.com/ashleyweaver">Ashley Weaver</a>.
+		</p>
+	</footer>
+	<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+</body>
 </html>
