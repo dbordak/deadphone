@@ -30,6 +30,9 @@
 				<h3>{{ name }}'s status:</h3>
 				{% if msg %}
 					{% if time %}
+						{% if status %}
+							<p>{{ status }}</p>
+						{% endif %}
 						<p>{{ msg }}</p>
 						<p>Last Updated: {{ time }}</p>
 					{% endif %}

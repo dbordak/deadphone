@@ -107,4 +107,8 @@ def profile(ID):
 		else:
 			avail = ""
 			conj = ""
-		return render_template('index.html', name=name, msg=device['msg'], time=device['time'], bat=bat, avail=avail, conj=conj)
+		if len(conj):
+			status = name + avail + conj + bat
+		else:
+			status = ""
+		return render_template('index.html', name=name, msg=device['msg'], time=device['time'], status=status)
