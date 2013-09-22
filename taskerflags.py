@@ -18,24 +18,25 @@ devices = db.devices
 # busy - current google calendar busy status. 0 for available, 1 for busy
 
 def update_device(ID, msg, **kwargs):
-	if 
+	device = {
+		'ID' : ID,
+		'msg' : msg,
+		'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
+	}
+	 
 	return devices.find_and_modify(
 		query={'ID': ID},
-		update={
-			'ID' : ID,
-			'msg' : msg,
-			'time' : datetime.strftime(datetime.now(),'%a %b %d, %Y - %I:%M %p')
-		},
+		update=device,
 		upsert=True
 	)
 
 def brace_handler(ID, body):
 	if body.startswith('{'):
-		op = body.strip('{}').split(',')
-		if op[0] == "bat":
-			#TODO: update_device()
-		if op[0] == "busy":
-			#TODO: update_device()
+		opt = body.strip('{}').split(',')
+		if opt[0] == "bat":
+			update_device(ID, body, bat=opt[1])
+		if opt[0] == "busy":
+			update_device(ID, body, busy=opt[1])
 	else:
 		update_device(ID, body)
 
